@@ -9,6 +9,12 @@ file (GLOB LIB_SOURCES src/*.cpp)
 file (GLOB LIB_HEADERS src/*.hpp )
 add_library (yahoo-finance ${LIB_SOURCES} ${LIB_HEADERS})
 
+set_target_properties(yahoo-finance PROPERTIES PUBLIC_HEADER "${LIB_HEADERS}")
+
+INSTALL(TARGETS yahoo-finance 
+	LIBRARY DESTINATION "/usr/local/lib"
+	PUBLIC_HEADER DESTINATION "/usr/local/include/yahoo-finance")
+
 # Example executable
 add_executable (example src/example.cpp)
 target_link_libraries (example yahoo-finance curl)
